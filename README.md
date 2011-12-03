@@ -3,6 +3,10 @@ Appload DNS
 
 Fork of ndns by Jeremy Johnstone created for Appload platform.
 
+Installation:
+
+    npm install appload-dns
+
 Example in Coffeescript:
 
     dns = require "appload-dns"
@@ -40,5 +44,7 @@ Zones configuration can be replaced in real-time by __reload__ method.
 Connection can be closed by __close__ method.
 
     server.close()
+
+
     
         
