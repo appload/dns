@@ -2,8 +2,8 @@
   "name": "appload-dns",
   "description": "DNS library in node.js",
   "version": "0.1.0",
-  "homepage": "https://github.com/appload/ndns",
-  "repository": "https://github.com/appload/ndns.git",
+  "homepage": "https://github.com/appload/dns",
+  "repository": "https://github.com/appload/dns.git",
   "author": "Rafał Sobota",
   "directories": {
     "lib": "lib"
@@ -11,8 +11,8 @@
   "engines": {
     "node": "*"
   },
-  "main": "index"
-  "dependencies" : {
-    "underscore" : ">= 1.2.2"
+  "main": "index",
+  "dependencies": {
+    "underscore": ">= 1.2.2"
   }
 }
