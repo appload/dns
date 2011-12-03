@@ -6,6 +6,7 @@
 *.DS_*
 *.swp
 
+node_modules
 
 .hgignore
 .hg/
