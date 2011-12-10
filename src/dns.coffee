@@ -74,7 +74,7 @@ class Zone
       false
 
 class Response
-  constructor: (name, @type, @zone) ->
+  constructor: (name, @type, @zone, @zones) ->
     @name = @zone.dotize name
     @answer = []
     @authoritative = []
@@ -106,7 +106,8 @@ class Response
   
   add_additionals: ->
     for record in _.union(@answer, @authoritative)
-      @add_additional @zone.find "A", record.value
+      for zone in @zones
+        @add_additional zone.find "A", record.value
   
   add_soa_to_authoritative: ->
     @add_authoritative @zone.find_class "SOA"
@@ -164,7 +165,7 @@ class DNS
       type = req.q[0].typeName
       if zone = _.find(@zones, ((zone) -> zone.handles name))
         console.log "zone found", zone.dot_domain
-        response = new Response(name, type, zone)
+        response = new Response(name, type, zone, @zones)
         response.resolve().commit(req, res)
     res.send()
   
