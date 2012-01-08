@@ -1,7 +1,7 @@
 {
   "name": "appload-dns",
   "description": "DNS library in node.js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/appload/dns",
   "repository": "https://github.com/appload/dns.git",
   "author": "Rafał Sobota",
