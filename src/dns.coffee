@@ -21,8 +21,9 @@ class Zone
     refresh: 1800        # refresh (30 minutes)
     retry: 900           # retry (15 minutes)
     expire: 1209600      # expire (2 weeks)
-    min_ttl: 1200        # minimum TTL (20 minutes)
+    min_ttl: 30          # minimum TTL (20 minutes)
     admin: "hostmaster.#{@domain}."
+    dns1: "dns1.#{@domain}."
   
   record_defaults: ->
     ttl: @ttl or @defaults().ttl
@@ -60,7 +61,7 @@ class Zone
     _(@records).find (record) -> (record.class == type) and (record.name == name)
       
   create_soa: ->
-    keys = "dot_domain admin serial refresh retry expire min_ttl"
+    keys = "dns1 admin serial refresh retry expire min_ttl"
     value = keys.split(" ").map((param) => @[param]).join(" ")
     {name: @dot_domain, @ttl, class: "SOA", value}
   
@@ -143,11 +144,14 @@ class Response
 
 class DNS
   
-  constructor: (zones) ->
+  @createServer = (config...) ->
+    new @ config...
+  
+  constructor: (zones = {}) ->
     @server = ndns.createServer('udp4')
     @server.on 'request', @resolve
     @port or= 53
-    @reload zones or {}
+    @reload zones
   
   reload: (zones) ->
     @zones = (new Zone(key, val) for key, val of zones)
@@ -172,5 +176,4 @@ class DNS
   close: ->
     @server.close()
 
-exports.createServer = (config...) ->
-  new DNS(config...)
+module.exports = DNS
