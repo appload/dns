@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/appload/dns.png)](http://travis-ci.org/appload/dns)
 Appload DNS
 ==============================
 
